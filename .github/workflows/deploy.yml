@@ -24,7 +24,7 @@ jobs:
 
   sonar-scan:
     runs-on: ubuntu-latest
-    need: download-code
+    needs: download-code
     continue-on-error: true
 
     steps:
