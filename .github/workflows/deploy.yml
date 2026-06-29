@@ -22,6 +22,24 @@ jobs:
           name: source-code
           path: .
 
+  sonar-scan:
+    runs-on: ubuntu-latest
+    need: download-code
+    continue-on-error: true
+
+    steps:
+      - name: download source code as artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: source-code
+          path: .
+
+      - name: SonarCloud scan
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: .
+        env:
+          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}       
 
   install-and-build:
     runs-on: ubuntu-latest
